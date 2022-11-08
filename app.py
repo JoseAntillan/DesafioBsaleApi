@@ -52,7 +52,7 @@ def listar_productos():
 @app.route('/productos/<int:categoria>', methods=['GET'])
 def leer_producto_bd(categoria):
     try:
-
+        busqueda = request.args.get("busqueda")
         cursor = conexion.connection.cursor()
         # consulta SQL combina la tabla product y category para poder entregar el nombre de la categoria
         sql =  \
@@ -61,7 +61,9 @@ def leer_producto_bd(categoria):
               " FROM product INNER JOIN category ON product.category = category.id WHERE product.category="+str(categoria)+" ORDER BY product.name ) "
 
         #si existe el parametro busqueda se usa como filtro en la consulta SQL
-
+        if busqueda:
+            busqueda = busqueda.strip()
+            sql = "SELECT * FROM " + sql + "AS TablaBusqueda WHERE TablaBusqueda.producto LIKE '%"+busqueda+"%' ORDER BY TablaBusqueda.producto"
 
         cursor.execute(sql)
         datos = cursor.fetchall()
