@@ -88,6 +88,70 @@ def leer_producto_bd(categoria):
         return jsonify({'mensaje': "Error "+str(ex), 'exito': False})
 
 
+
+@app.route('/categorias/count/<int:categoria>', methods=['GET'])
+def contar_categoria(categoria):
+    try:
+        app.config["MYSQL_HOST"] = "mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com"
+        app.config["MYSQL_USER"] = "bsale_test"
+        app.config["MYSQL_PASSWORD"] = "bsale_test"
+        app.config["MYSQL_DB"] = "bsale_test"
+
+
+        cursor = conexion.connection.cursor()
+
+        sql =  \
+              "SELECT COUNT(*) from product where category ="+str(categoria)
+
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        Categorias = []
+        for fila in datos:
+            Categoria = {
+                'cantidad': fila[0],
+                'category_id': categoria
+            }
+            Categorias.append(Categoria)
+        return jsonify({'Cantidad': Categorias, 'mensaje': "Cantidad listadas.", 'exito': True})
+    except Exception as ex:
+        return jsonify({'mensaje': "Error "+str(ex), 'exito': False})
+
+
+
+
+
+
+#obtener nombre de las categorias
+@app.route('/categorias', methods=['GET'])
+def listar_categorias():
+    try:
+        app.config["MYSQL_HOST"] = "mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com"
+        app.config["MYSQL_USER"] = "bsale_test"
+        app.config["MYSQL_PASSWORD"] = "bsale_test"
+        app.config["MYSQL_DB"] = "bsale_test"
+
+
+        cursor = conexion.connection.cursor()
+
+        sql =  \
+              "SELECT * from category"
+
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        Categorias = []
+        for fila in datos:
+            Categoria = {
+                'id': fila[0],
+                'name': fila[1]
+            }
+            Categorias.append(Categoria)
+        return jsonify({'Categorias': Categorias, 'mensaje': "Categorias listadas.", 'exito': True})
+    except Exception as ex:
+        return jsonify({'mensaje': "Error "+str(ex), 'exito': False})
+
+
+
+
 def pagina_no_encontrada(error):
     return "<h1>Página no encontrada</h1>", 404
 
