@@ -48,7 +48,7 @@ def listar_productos():
         return jsonify({'mensaje': "Error "+str(ex), 'exito': False})
 
 
-@app.route('/productos/<int:categoria>', methods=['GET'])
+@app.route('/categorias/<int:categoria>/listarproductos', methods=['GET'])
 def leer_producto_bd(categoria):
     try:
         app.config["MYSQL_HOST"] = "mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com"
