@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from configuracion import configuracion
@@ -6,6 +6,10 @@ from configuracion import configuracion
 app = Flask(__name__)
 CORS(app)
 conexion = MySQL(app)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route('/productos', methods=['GET'])
 def listar_productos():
@@ -22,7 +26,6 @@ def listar_productos():
               " ( SELECT product.id, product.name as producto, product.url_image, product.price, product.discount, product.category, " \
               " category.id as 'category_id', category.name as 'category_name' " \
               " FROM product INNER JOIN category ON product.category = category.id ORDER BY product.name ) "
-
         #si existe el parametro busqueda se usa como filtro en la consulta SQL
         if busqueda:
             busqueda = busqueda.strip()
@@ -55,7 +58,7 @@ def leer_producto_bd(categoria):
         app.config["MYSQL_USER"] = "bsale_test"
         app.config["MYSQL_PASSWORD"] = "bsale_test"
         app.config["MYSQL_DB"] = "bsale_test"
-        busqueda = request.args.get("busqueda")
+
         cursor = conexion.connection.cursor()
         # consulta SQL combina la tabla product y category para poder entregar el nombre de la categoria
         sql =  \
@@ -63,10 +66,8 @@ def leer_producto_bd(categoria):
               " category.id as 'category_id', category.name as 'category_name' " \
               " FROM product INNER JOIN category ON product.category = category.id WHERE product.category="+str(categoria)+" ORDER BY product.name ) "
 
-        #si existe el parametro busqueda se usa como filtro en la consulta SQL
-        if busqueda:
-            busqueda = busqueda.strip()
-            sql = "SELECT * FROM " + sql + "AS TablaBusqueda WHERE TablaBusqueda.producto LIKE '%"+busqueda+"%' ORDER BY TablaBusqueda.producto"
+
+
 
         cursor.execute(sql)
         datos = cursor.fetchall()

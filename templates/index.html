@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Bsale API</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+
+
+        <div class="container">
+
+            <section id="top" class="section docs-heading">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="big-title text-center">
+                            <h1>Desafio Bsale API</h1>
+                            <p class="lead">Created by <a href="https://github.com/JoseAntillan" target="_blank">Jose Antillan</a></p>
+                        </div>
+                   
+                    </div>
+                 
+                </div>
+            
+
+                <hr>
+
+            </section>
+  
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
+                        <ul class="nav">
+                            <h1><li><a href="#introduccion">Introduccion</a></li></h1>
+
+
+
+
+
+
+                            <li><a href="#introduccion">Introduccion</a></li>
+                            <li><a href="#urlbase">URL base</a></li>
+   
+
+
+
+                            <h1><li><a href="#Productos">Productos</a></li></h1>
+                            <li><a href="#AtributosProductos">Atributos</a></li>
+                            <li><a href="#ObtenerProductos">Obtener todos los productos</a></li>
+                            <li><a href="#ObtenerProductosC">Productos de una categoria</a></li>
+                            <li><a href="#BuscarProductos">Buscar productos</a></li>
+
+                            <h1><li><a href="#Categorias">Categorias</a></li></h1>
+                            <li><a href="#AtributosCategorias">Atributos</a></li>
+                            <li><a href="#ObtenerCategorias">Obtener todas las categorias</a></li>
+                        </ul>
+                    </nav >
+                </div>
+                <div class="col-md-9">
+                    <section class="welcome">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                               <h2 class="dark-text" id = "introduccion">Introducción<hr></h2>
+                                <div class="row">
+
+                                    <div class="col-md-12 full">
+                               
+                                        <hr>
+                                        <div>
+                                            <p>Esta documentación lo ayudará a familiarizarse con los recursos de la API "Bsale" y entregarle todo lo necesario para comenzar con sus solicitudes.
+                                                
+                                            
+                                            </p>
+                                            <h1 id="urlbase">URL base</h1>
+                                            <p> <code>https://desafio-bsale-api.herokuapp.com</code> <br>
+                                              Todas las solicitudes son solicitudes <code>GET</code>. Todas las respuestas devolverán datos en formato <code>JSON.</code>
+                                         
+                                            </p>
+                                            <p>
+                                              En esta API podemos acceder a 2 recursos;
+                                              <ol>
+                                                <li><strong>Productos</strong></li>
+                                                <li> <strong>Categorias</strong> </li>
+                                            </ol>
+                                            </p>
+
+
+                                    
+                                      
+                                              
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end row -->
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row">
+                          <div class="col-md-12 left-align">
+                             <h2 class="dark-text" id = "Productos">Productos Endpoint <hr></h2>
+                           
+                             <div class="row">
+                               
+                                  <div class="col-md-12 full">
+                                    
+                                      <hr>
+                                      <div>
+                                        
+                                          <h1 id="AtributosProductos">Atributos de productos que devuelve la API</h1>
+
+                                          <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">Atributo</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Descripcion</th>
+                                           
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <th scope="row">id</th>
+                                                <td>int</td>
+                                                <td>Identificador único del producto</td>
+                                               
+                                              </tr>
+                                              <tr>
+                                                <th scope="row">name</th>
+                                                <td>String</td>
+                                                <td>Nombre del producto</td>
+                                              
+                                              </tr>
+                                              <tr>
+                                                <th scope="row">url_image</th>
+                                                <td>String</td>
+                                                <td>URL de la imagen asociada al producto</td>
+                                              
+                                              </tr>
+
+                                              <tr>
+                                                <th scope="row">price</th>
+                                                <td>Float</td>
+                                                <td>Precio de venta del producto</td>
+                                              
+                                              </tr>
+
+                                              <tr>
+                                                <th scope="row">discount</th>
+                                                <td>int</td>
+                                                <td>Porcentaje de descuento del producto</td>
+                                              
+                                              </tr>
+
+                                              <tr>
+                                                <th scope="row">Ccategory_id</th>
+                                                <td>int</td>
+                                                <td>Identificador de la categoría </td>
+                                
+                                              </tr>
+
+                 
+
+                                                                       
+                                              <tr>
+                                                <th scope="row">Ccategory_name</th>
+                                                <td>String</td>
+                                                <td>nombre de la categoría del producto </td>
+                                
+                                              </tr>
+
+
+                                            </tbody>
+                                          </table>
+
+
+                                          <strong> <u> <h1 id="ObtenerProductos">Obtener todos los productos:</h1></u>  </strong>
+                                          Para obtener una lista con todos los productos:<br><h1>   
+                                            <strong> <code>/productos</code> </strong></h1>
+
+                                            <strong> <h3 id="ObtenerProductosC"><u>Obtener todos los productos que esten en una categoria:</u></h2></strong>
+                                            <h1>   
+                                              <strong> <code>/categorias/idcategoria/listarproductos</code> </strong></h1>
+                                    
+                                     
+                                              ejemplo para obtener todos los productos de la categoria 5:
+                                              <h1>   
+                                                <strong> <code>/categorias/5/listarproductos</code> </strong></h1>
+
+
+
+
+                                                <strong> <u><h1 id="BuscarProductos">Buscar productos:</u></h1> </strong>
+                                                Para obtener una lista con todos los productos que contienen la palabra buscada en el nombre: <br><h1>   
+                                                  <strong> <code>/productos?busqueda=</code> </strong></h1>
+      
+                                                  ejemplo para buscar papas:
+                                                  <h1>   
+                                                    <strong> <code>/productos?busqueda=papas</code> </strong></h1>
+                                          
+                                           
+      
+                                            
+                                      </div>
+                                  </div>
+
+                              </div>
+                              <!-- end row -->
+                          </div>
+                      </div>
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <div class="row">
+                        <div class="col-md-12 left-align" >
+                           <h2 class="dark-text" id = "Categorias" >Categorias Endpoint <hr></h2>
+                         
+                           <div class="row">
+                             
+                                <div class="col-md-12 full">
+                                  
+                                    <hr>
+                                    <div>
+                                      
+                                        <h1 id="AtributosCategorias">Atributos de categoria que devuelve la API</h1>
+
+                                        <table class="table">
+                                          <thead>
+                                            <tr>
+                                              <th scope="col">Atributo</th>
+                                              <th scope="col">Tipo</th>
+                                              <th scope="col">Descripcion</th>
+                                         
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <th scope="row">id</th>
+                                              <td>int</td>
+                                              <td>Identificador único de la categoria</td>
+                                             
+                                            </tr>
+                                            <tr>
+                                              <th scope="row">name</th>
+                                              <td>String</td>
+                                              <td>Nombre de la categoria</td>
+                                            
+                                            </tr>
+                                            <tr>
+                                              <th scope="row">cantidad_productos</th>
+                                              <td>int</td>
+                                              <td>Cantidad de productos que existen en la categoria</td>
+                                            
+                                            </tr>
+  
+
+
+                                          </tbody>
+                                        </table>
+
+
+                                        <strong> <u> <h1 id="ObtenerCategorias">Obtener todas las categorias:</h1></u>  </strong>
+                                        Para obtener una lista con todas las categorias:<br><h1>   
+                                          <strong> <code>/categorias</code> </strong></h1>
+
+                             
+                                  
+                                   
+                                            
+                                        
+                                         
+    
+                                          
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end row -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    </section>
+
+        
+
+
+
+                    
+
+
+       
+                    
+
+                 
+                     
+                </div>
+                <!-- // end .col -->
+
+            </div>
+            <!-- // end .row -->
+
+        </div>
+        <!-- // end container -->
+
+    </div>
+    <!-- end wrapper -->
+
+
+  
+
+</body>
+
+</html>
